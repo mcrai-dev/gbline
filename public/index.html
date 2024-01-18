@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GBL Systems</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/popup.css">
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="icon" type="image/png" href="img/logo.png" />
+
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed&display=swap');
+
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Fira Sans Condensed', sans-serif;
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        #logo {
+            max-width: 70px;
+            height: auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        p {
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="particles-js"></div>
+
+    <header>
+        <div>
+            <h1>GBL</h1>
+            <p>Monitoring systems</p>
+        </div>
+        <img id="logo" src="img/logo.png" alt="Logo GBL">
+    </header>
+
+    <div class="container">
+        <h1>Realtime Data</h1>
+        <table id="data-table" class="data-table">
+            <thead>
+                <tr>
+                    <th>Location</th>
+                    <th>GENset</th>
+                    <th>GENset duration</th>
+                    <th>Gauge</th>
+                    <th>Jirama</th>
+                    <th>Rectifier DC</th>
+                    <th>Last started</th>
+                    <th>Last stopped</th>
+                    <th>StartedDay</th>
+                    <th>GENset Status</th>
+                    <th>Max liter</th>
+                    <th>Last refueling</th>
+                    <th>Observation</th>
+                    <th>Turn On/Off</th>
+                </tr>
+            </thead>
+            <tbody id="data-body">
+            </tbody>
+        </table>
+    </div>
+
+
+    <div id="login-popup" class="modal">
+        <div class="modal-content" id="modal-content">
+            <form id="login-form">
+                <label for="username">
+                    <i class="fas fa-user"></i>
+                    Nom d'utilisateur:
+                </label>
+                <input type="text" id="username" name="username" required>
+                <br>
+                <label for="password">
+                    <i class="fas fa-lock"></i>
+                    Mot de passe:
+                </label>
+                <input type="password" id="password" name="password" required>
+                <br>
+                <input type="submit" value="Se connecter">
+                <a href="#" id="annuler_popup_form" onclick="closeLoginPopup()">
+                    Annuler
+                </a>
+            </form>
+
+
+            <form class="data-update" id="data-update">
+                <h2 id="location-title"></h2>
+                <div class="input-group">
+                    <label for="max-liter">
+                        <i class="fas fa-gas-pump"></i> Maximum liter:
+                    </label>
+                    <input type="number" id="max-liter" name="max-liter" placeholder="Maximum liter">
+                </div>
+
+                <div class="input-group">
+                    <label for="last-refueling">
+                        <i class="fas fa-calendar"></i> Last refueling date:
+                    </label>
+                    <input type="datetime-local" id="last-refueling" name="last-refueling"
+                        placeholder="Last refueling date">
+                </div>
+
+                <div class="input-group">
+                    <label for="text-input">
+                        <i class="fas fa-icon"></i> Observation :
+                    </label>
+                    <input type="text" id="text-observation" name="text-observation"
+                        placeholder="Enter your Observation">
+                </div>
+
+                <div class="button-group">
+                    <input type="button" value="Valider" id="validate-button" class="submit-button">
+                    <a href="#" id="annuler_popup_form" onclick="closeLoginPopup()" class="cancel-link">
+                        Annuler
+                    </a>
+                </div>
+
+        </div>
+        </form>
+
+
+    </div>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 80,
+                    "density": {
+                        "enable": true,
+                        "value_area": 800
+                    }
+                },
+                "color": {
+                    "value": "#000"
+                },
+                "shape": {
+                    "type": "circle",
+                    "stroke": {
+                        "width": 0,
+                        "color": "#000000"
+                    },
+                    "polygon": {
+                        "nb_sides": 5
+                    },
+                    "image": {
+                        "src": "img/github.svg",
+                        "width": 100,
+                        "height": 100
+                    }
+                },
+                "opacity": {
+                    "value": 0.5,
+                    "random": false,
+                    "anim": {
+                        "enable": false,
+                        "speed": 0.5,
+                        "opacity_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "size": {
+                    "value": 3,
+                    "random": true,
+                    "anim": {
+                        "enable": false,
+                        "speed": 40,
+                        "size_min": 0.1,
+                        "sync": false
+                    }
+                },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 150,
+                    "color": "#000",
+                    "opacity": 0.4,
+                    "width": 1
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 3,
+                    "direction": "none",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false,
+                    "attract": {
+                        "enable": false,
+                        "rotateX": 600,
+                        "rotateY": 1200
+                    }
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": {
+                        "enable": true,
+                        "mode": "grab"
+                    },
+                    "onclick": {
+                        "enable": true,
+                        "mode": "push"
+                    },
+                    "resize": true
+                },
+                "modes": {
+                    "grab": {
+                        "distance": 140,
+                        "line_linked": {
+                            "opacity": 1
+                        }
+                    },
+                    "bubble": {
+                        "distance": 400,
+                        "size": 40,
+                        "duration": 1,
+                        "opacity": 8,
+                        "speed": 3
+                    },
+                    "repulse": {
+                        "distance": 200,
+                        "duration": 0.4
+                    },
+                    "push": {
+                        "particles_nb": 4
+                    },
+                    "remove": {
+                        "particles_nb": 2
+                    }
+                }
+            },
+            "retina_detect": true
+        });
+    </script>
+
+    <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.2/firebase-database-compat.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="/js/app.js"></script>
+    <script src="/js/form.js"></script>
+</body>
+
+</html>

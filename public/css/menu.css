@@ -1,0 +1,26 @@
+/* Ajoutez ces styles CSS à votre fichier de style existant ou dans une balise style dans le HTML */
+
+/* Style du menu déroulant */
+.dropdown-menu {
+    position: absolute;
+    background-color: #fff;
+    /* Couleur de fond du menu déroulant */
+    border: 1px solid #ccc;
+    /* Bordure du menu déroulant */
+    padding: 5px;
+    /* Espacement interne du menu déroulant */
+    z-index: 1000;
+    /* Assurez-vous que le menu déroulant est au-dessus du reste du contenu */
+}
+
+/* Style des options du menu */
+.dropdown-option {
+    padding: 5px;
+    cursor: pointer;
+}
+
+/* Style au survol d'une option */
+.dropdown-option:hover {
+    background-color: #f0f0f0;
+    /* Couleur de fond au survol d'une option */
+}
