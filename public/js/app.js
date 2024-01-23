@@ -1,6 +1,8 @@
+
 // variable globale
 let selectedLocationName = '';
 let cumulus =0;
+
 
 // app.js
 const firebaseConfig = {
@@ -145,6 +147,8 @@ function fetchData() {
 
                         const blinkInterval = setInterval(() => {
 
+                       
+                       
                             jaugeValueCell.style.backgroundColor = 'rgba(255, 66, 66, 0.6)';
 
                         }, 500);
