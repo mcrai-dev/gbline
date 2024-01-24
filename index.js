@@ -48,10 +48,8 @@ app.get('/', function (req, res) {
 // endpoint to receive data from firebase
 app.get('/data', (req, res)=>{
     fetchData();
-    res.status(200).send("Success")
+    res.status(200).send("aziruherihgjreldjgfl")
 });
-
-
 
 /**
  * function to use to insert data to database 
@@ -75,8 +73,23 @@ function fetchData(){
             const locationName = locationSnapshot.key;
             const locationData = locationSnapshot.val();
 
+            // main(locationName, locationName)
+
             console.log('Location:', locationName);
             console.log('Details:', locationData);
+            console.log('______')
+
+            const filteredData = {
+                TurnOnGroup: locationData.TurnOnGroup || '',
+                Battery_status: locationData.battery_status || '',
+                Duration: locationData.duration || '',
+                Gauge: locationData.jaugeValue || '',
+            }
+
+            console.log("TurnOnGroup : ", filteredData.TurnOnGroup)
+            console.log("Battery : ", filteredData.Battery_status)
+            console.log("Duration : ", filteredData.Duration)
+            console.log("Gauge : ", locationData.jaugeValue)
             console.log('_____________________________________________________')
         });
     }).catch((error)=>{
